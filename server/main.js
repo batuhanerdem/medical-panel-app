@@ -20,14 +20,14 @@ Meteor.startup(() => {
     password: "erdem",
     createdAt: new Date(),
     profile: {
-      tc: 121212122,
+      tc: 12345678912,
       name: "Batuhan",
       surname: "Erdem",
       patients: patients
     }
   }
   // if (!Meteor.users.findOne({ username: user.username })) {
-  //   Accounts.createUser(user); //as
+  //   Accounts.createUser(user);
   // } else {
   //   console.log("varmis");
   // }

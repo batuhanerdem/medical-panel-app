@@ -7,6 +7,14 @@ FlowRouter.route('/', {
   }
 });
 
+FlowRouter.route("/login", {
+  name: 'public.doctor',
+  action: function () {
+    // this.render("login");
+    this.render("loginTest");
+  }
+});
+
 FlowRouter.route("/doctor", {
   name: 'public.doctor',
   action: function () {
