@@ -15,8 +15,6 @@ Template.register.events({
         event.preventDefault()
         const username = event.target.username.value
         const password = event.target.password.value
-
-
         const tc = event.target.tc.value
         const name = event.target.name.value
         const surname = event.target.surname.value
@@ -26,7 +24,7 @@ Template.register.events({
         const user = {
             // _id: "denemeId",
             username: username,
-            password: hashedPassword, // Şifre değeri doğru bir şekilde atandı
+            password: password,
 
             // services: {},
             createdAt: new Date(), //
@@ -48,7 +46,8 @@ Template.register.events({
         }
 
         //  Meteor.logout()
-        Accounts.createUser(user);
+        // Accounts.createUser(user);
+        Meteor.users.insert(user)
         //  console.log(Meteor.userId());
     }
 });
