@@ -1,8 +1,6 @@
 import { Meteor } from 'meteor/meteor'
 import { Accounts } from 'meteor/accounts-base'
 
-const patients = [{ name: "hasta2" }, { name: "Hasta3" }]
-
 Template.register.onCreated(function () {
     this.user = {}
 })
@@ -27,12 +25,11 @@ Template.register.events({
             password: password,
 
             // services: {},
-            createdAt: new Date(), //
             profile: {
                 tc: tc,
                 name: name,
+                createdAt: new Date(),
                 surname: surname,
-                //patients: patients
             }
         }
         const validationContext = userSchema.newContext();
@@ -44,10 +41,18 @@ Template.register.events({
         } else {
             console.log('Şema doğrulama başarılı!');
         }
-
+        Meteor.UserProfile
         //  Meteor.logout()
-        // Accounts.createUser(user);
-        Meteor.users.insert(user)
+        Accounts.createUser({
+            username, password, profile: {
+                tc,
+                name,
+                createdAt: new Date(),
+                surname
+
+            }
+        });
+        // Meteor.users.insert(user)
         //  console.log(Meteor.userId());
     }
 });
