@@ -1,5 +1,7 @@
 import { Meteor } from 'meteor/meteor'
 import { Accounts } from 'meteor/accounts-base'
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
+
 
 Template.register.events({
     'submit form': function (event, template) {
@@ -21,8 +23,7 @@ Template.register.events({
         }
         //  Meteor.logout()
         Accounts.createUser(user, function (error) {
-            if (error) console.log("er", error.message);
-            else console.log("Basariyla kayit olundu");
+            error ? console.log("error:", error.message) : FlowRouter.go("doctor")
         });
         //  console.log(Meteor.userId());
     }

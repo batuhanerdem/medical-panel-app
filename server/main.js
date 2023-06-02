@@ -4,7 +4,7 @@ import { Accounts } from 'meteor/accounts-base'
 Meteor.startup(() => {
 
   patientObject = {
-    name: "hastayim",
+    name: "hasta",
     id: 1,
     surname: "hasta",
     Age: 23,
@@ -15,7 +15,7 @@ Meteor.startup(() => {
 
   const patients = [{ name: "hasta2" }, { name: "Hasta3" }]
   const user = {
-    _id: "asdas1dsgrgtbzxvsga",
+    // _id: "asdas1dsgrgtbzxvsga",
     username: "batuhan",
     password: "erdem",
     createdAt: new Date(),

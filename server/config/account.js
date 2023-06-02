@@ -4,11 +4,13 @@ Accounts.onCreateUser(function (options, user) {
     const { _id, profile: { tc, name, surname } } = user;
     Doctors.insert({ userId: _id, tc, name, surname })
 
-    // Doctors.insert({
+    return user
+})
+
+
+// Doctors.insert({
     //     userId: user._id,
     //     tc: user.profile.tc,
     //     name: user.profile.name,
     //     surname: user.profile.surname
     // }
-    return user
-})
