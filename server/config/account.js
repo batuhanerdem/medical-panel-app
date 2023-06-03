@@ -6,11 +6,3 @@ Accounts.onCreateUser(function (options, user) {
 
     return user
 })
-
-
-// Doctors.insert({
-    //     userId: user._id,
-    //     tc: user.profile.tc,
-    //     name: user.profile.name,
-    //     surname: user.profile.surname
-    // }

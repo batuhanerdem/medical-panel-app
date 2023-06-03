@@ -1,5 +1,35 @@
 <template name="doctor">
   <br />
-  <a href="/">home</a>
+  <div class="container">
+  <form>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Name</label>
+      <input type="text" class="form-control" id="exampleInputEmail1" name="name"  placeholder="Enter name">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Surname</label>
+      <input type="text" class="form-control" id="exampleInputEmail1" name="surname"  placeholder="Enter surname">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Tc</label>
+      <input type="text" class="form-control" id="exampleInputPassword1" name = "tc" placeholder="Enter tc number">
+    </div>
+    <div class="form-group">
+      <label>Age</label>
+      <input type="text" class="form-control" id="exampleInputEmail1" name="age"  placeholder="Enter age">
+    </div>
+    <br>
+    <div class="form-group">
+      <label>Gender</label>
+      <select class="custom-select mr-sm-2" name="gender" id="inlineFormCustomSelect">
+        <option selected>Choose</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>   
+     </div>
+    <br>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
   
 </template>
