@@ -1,7 +1,7 @@
 import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
 
-
+//middleware ekle, giris yapilmadiysa giremesin
 
 Template.doctor.events({
     'click .btn-register': function (event, template) {
@@ -20,6 +20,5 @@ Template.doctor.events({
         const user = { name, surname, gender, age, tc }
 
         const doctorId = await Meteor.callAsync("patient.create", user)
-        console.log(doctorId);
     }
 }); 

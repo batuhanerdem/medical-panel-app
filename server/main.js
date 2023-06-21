@@ -11,5 +11,4 @@ Meteor.startup(() => {
     doctorId: "String"
   }
   //Patients.insert(patient)
-
 });  

@@ -3,7 +3,8 @@ import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 FlowRouter.route('/', {
   name: 'public.home',
   action: function (params, queryParams) {
-    this.render('homePage');
+    // this.render('homePage');
+    this.render('babis'); //SUNU DEGISTIRMEYI UNUTMA  
   }
 });
 
@@ -23,7 +24,7 @@ FlowRouter.route("/doctor", {
 
 FlowRouter.route("/patient", {
   name: 'public.patient',
-  action: function () {
+  action: function (params, queryparams) {
     this.render("patient");
   }
 });
@@ -32,5 +33,12 @@ FlowRouter.route("/register", {
   name: 'public.register',
   action: function () {
     this.render("register")
+  }
+});
+
+FlowRouter.route("/enter", {
+  name: 'public.enter',
+  action: function () {
+    this.render("enter")
   }
 })
