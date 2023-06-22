@@ -2,13 +2,14 @@
   hasta <br />
   <br />
   <a href="/">home</a>
-  <ul>
-    {{#each patients}}
-        {{> patientList}}
-    {{/each}}
-</ul>
-</template>
 
-<template name="patientList">
+  {{#each doctors}}
+    <a href="/patients/{{userId}}">{{name}}</a>
 
+    <a href="{{pathFor 'public.patient.id' id=userId}}">1 {{name}}</a>
+
+  {{/each}}
+
+  {{#each patient}}
+  {{/each}}
 </template>

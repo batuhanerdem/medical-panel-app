@@ -1,25 +1,35 @@
 import { Meteor } from 'meteor/meteor'
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
 Template.patient.onCreated(function () {
-    Meteor.subscribe("patient.list", {
-        onReady: function () {
-            console.log('onReady', arguments)
-        },
-        onError: function () {
-            console.log('onError', arguments)
-        },
-    });
+    const self = this
+    self.doctors = new ReactiveVar([])
+    self.patients = new ReactiveVar([])
+    Meteor.call('doctor.list', (err, res) => {
+        if (err) return
+        console.log('res', res);
+        self.doctors.set(res)
+    })
+
 })
 
 Template.patient.onRendered(function () {
+    const self = this
+    const id = FlowRouter.getParam('id');
+    console.log(id);
     this.autorun(function () {
-        const patients = Patients.find({}).fetch()
-        if (patients.length == 0) return
-        console.log(patients);
+        Meteor.call('patient.listByDoctorId', (id), (err, value) => {
+            if (err) return
+            console.log('log value', value);
+            self.patients.set(value)
+        })
     });
+    console.log(self.patients.get());
 });
 
 Template.patient.helpers({
-    //patients: this.patients
+    doctors: function () {
+        return Template.instance().doctors.get()
+        // return Doctors.find({})
+    }
 });
-

@@ -29,6 +29,13 @@ FlowRouter.route("/patient", {
   }
 });
 
+FlowRouter.route("/patient/:id", {
+  name: 'public.patient.id',
+  action: function (params, queryparams) {
+    this.render("patient");
+  }
+});
+
 FlowRouter.route("/register", {
   name: 'public.register',
   action: function () {

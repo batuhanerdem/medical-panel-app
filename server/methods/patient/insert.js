@@ -2,8 +2,8 @@ new ValidatedMethod({
     name: 'patient.create',
     validate: PatientSchema.omit("status").validator(),
     async run(patient) {
-        patient.status = "pending"
+        patient.status = "not-here"
         Patients.insert(patient)
-        return patient.doctorId
+        return true
     }
 });
