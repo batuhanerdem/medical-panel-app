@@ -1,15 +1,17 @@
 <template name="patient">
-  hasta <br />
-  <br />
-  <a href="/">home</a>
-
+  <br>
   {{#each doctors}}
-    <a href="/patients/{{userId}}">{{name}}</a>
-
-    <a href="{{pathFor 'public.patient.id' id=userId}}">1 {{name}}</a>
-
+    <!-- <a href="/patients/{{userId}}">{{name}}</a> -->
+    <a href="{{pathFor 'public.patient.id' id=userId}}">Doktor:{{name}}</a>
   {{/each}}
 
-  {{#each patient}}
+  <div class="doctor-card">
+    <h3>Doktor: {{doctor.name}}</h3>
+  </div>
+
+  {{#each patients}}
+    <div class="patient-card {{#if eq status 'in-progress'}} text-danger {{/if}} doctor-card">
+      <h3>{{name}}</h3>
+    </div>
   {{/each}}
 </template>

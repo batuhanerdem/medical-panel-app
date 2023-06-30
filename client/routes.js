@@ -3,8 +3,7 @@ import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 FlowRouter.route('/', {
   name: 'public.home',
   action: function (params, queryParams) {
-    // this.render('homePage');
-    this.render('babis'); //SUNU DEGISTIRMEYI UNUTMA  
+    this.render('homePage');
   }
 });
 

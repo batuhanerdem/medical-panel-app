@@ -1,0 +1,21 @@
+.patient-board {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .patient-card {
+    width: 100vw;
+    padding: 20px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  .colored-card{
+    background-color: aquamarine;
+  }
+
+  .doctor-card{
+    margin-top: 10px;
+    text-align: center;
+  }
