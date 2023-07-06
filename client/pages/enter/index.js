@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor'
-
+// neden callasync
+//meteor backend calisma tarzi
 Template.enter.onCreated(function () {
     const self = this
 
@@ -26,8 +27,8 @@ Template.enter.events({
         if (!tc) return
         template.tc.set(tc)
 
-        const patient = await Meteor.callAsync('patient.list', tc)
-        console.log(patient);
+        const patient = await Meteor.callAsync('patient.listByTc', tc)
+        // console.log(patient);
         if (!patient) {
             template.isRegistered.set(false)
         } else {
@@ -35,7 +36,8 @@ Template.enter.events({
             const doctor = await Meteor.callAsync('doctor.listByUserId', patient.doctorId)
             template.doctor.set(doctor)
         }
-
+        AppUtil.refreshToken.set(AppUtil.refreshToken.get() + 1)
+        console.log(AppUtil.refreshToken.get());
     },
     'submit .register': async function (event, template) {
         event.preventDefault() //To do
