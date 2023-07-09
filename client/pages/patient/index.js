@@ -2,20 +2,16 @@ import { Meteor } from 'meteor/meteor'
 import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
 Template.patient.onCreated(function () {
-    this.patients = new ReactiveVar([])
     this.doctors = new ReactiveVar([])
     this.doctor = new ReactiveVar()
     this.id = FlowRouter.getParam('id');
-
-    //publish yerine hasta sira aldiginda call'u trigerlayacak bir sey yazilacak
-    this.subsPatients = Meteor.subscribe('patient.listForQue', this.id) //destroyda stopla
 
     Meteor.call('doctor.list', (err, res) => {
         if (err) return
         this.doctors.set(res)
     })
 
-    Meteor.call('doctor.listByUserId', this.id, (err, res) => {
+    Meteor.call('doctor.showByUserId', this.id, (err, res) => {
         if (err) return
         this.doctor.set(res)
     })
@@ -25,8 +21,7 @@ Template.patient.onRendered(function () {
     const self = this
     this.autorun(function () {
         Meteor.call("patient.updateFirstPatient", self.id)
-        self.patients.set(Patients.find({ doctorId: self.id }).fetch())
-
+        Patients.find().fetch()
     });
 });
 
@@ -35,8 +30,8 @@ Template.patient.helpers({
         return Template.instance().doctors.get()
     },
     patients: function () {
-        // return Template.instance().patients.get()
-        return Patients.find({ doctorId: Template.instance().id }).fetch()
+        const patients = Patients.find({ doctorId: Template.instance().id }, { sort: { joinedQueAt: 1 } }).fetch()
+        return patients
     },
     doctor: function () {
         return Template.instance().doctor.get()

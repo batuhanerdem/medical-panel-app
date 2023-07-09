@@ -1,53 +1,65 @@
 .patient-info {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    max-width: 400px;
-    margin: 0 auto;
-  
-    h2 {
-      font-size: 24px;
-      margin-bottom: 10px;
-    }
-  
-    p {
-      margin-bottom: 5px;
-    }
-  
-    strong {
-      font-weight: bold;
-    }
-  }
+  background-color: #fff;
+  // border-radius: 8px;
+  // box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+}
 
-  .isNotLoggedIn{
-    display: flex;
-    justify-content: center;
-    margin-top: 50px;
-  }
+.patient-info h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
 
-  .add-note {
-    margin-top: 20px;
-    border-top: 1px solid #ddd;
-    padding-top: 20px;
-  }
+.patient-info p {
+  margin-bottom: 5px;
+}
 
-  .add-note textarea {
-    width: 100%;
-    height: 100px;
-    padding: 8px;
-    resize: vertical;
-  }
+.patient-info strong {
+  font-weight: bold;
+}
 
-  .add-note button {
-    background-color: #4CAF50;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  .no-patient-alert{
-    display: flex;
-    justify-content: center;
-  }
+.isNotLoggedIn {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+// .add-note {
+//   margin-top: 20px;
+//   border-top: 1px solid #ddd;
+//   padding-top: 20px;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+// }
+
+.add-note textarea {
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  max-width: 400px;
+  width: 100%;
+  height: 100px;
+  padding: 8px;
+  resize: vertical;
+  margin-bottom: 10px;
+}
+
+.add-note button {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.no-patient-alert {
+  display: flex;
+  justify-content: center;
+}

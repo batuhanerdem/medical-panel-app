@@ -1,31 +1,27 @@
 <template name="doctor">
-
   {{#if patient}}
     <div class="patient-info">
+
       <h2>{{patient.name}}</h2>
       <p><strong>Yaş:</strong> {{patient.age}}</p>
       <p><strong>Cinsiyet:</strong> {{patient.gender}}</p>
       <p><strong>Tc:</strong> {{patient.tc}}</p>
 
-      <form class="add-note">
-        <div class="add-note">
-          <h3>Not Ekle</h3>
-          <textarea id="not-ekle-input" name="note" placeholder="Notunuzu buraya yazın"></textarea>
-          <button type="submit" id="not-ekle-btn">Sonraki hasta</button>
-        </div>
-      </form>
+      <div class="add-note">
+        <!-- <h3>Not Ekle</h3> -->
+        <form class="add-note-form">
+          <div class="note-input">
+            <textarea id="not-ekle-input" name="note" placeholder="Notunuzu buraya yazın"></textarea>
+          </div>
+          <div class="note-button">
+            <button type="submit" id="not-ekle-btn">Sonraki hasta</button>
+          </div>
+        </form>
+      </div>
     </div>
-
   {{else}}
     <div class="no-patient-alert">
       <h5>HICBIR HASTA YOK</h5>
     </div>
   {{/if}}
-
-  <div class="isNotLoggedIn">
-    {{#if isNotLoggedIn}}
-      <h5>{{isNotLoggedIn}}</h5>
-    {{/if}}
-  </div>
-
 </template>

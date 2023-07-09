@@ -21,10 +21,8 @@ Template.register.events({
                 surname
             }
         }
-        //  Meteor.logout()
         Accounts.createUser(user, function (error) {
             error ? console.log("error:", error.message) : FlowRouter.go("doctor")
         });
-        //  console.log(Meteor.userId());
     }
 });

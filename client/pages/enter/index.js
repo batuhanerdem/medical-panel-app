@@ -1,6 +1,5 @@
 import { Meteor } from 'meteor/meteor'
-// neden callasync
-//meteor backend calisma tarzi
+
 Template.enter.onCreated(function () {
     const self = this
 
@@ -11,7 +10,7 @@ Template.enter.onCreated(function () {
 
     Meteor.call('doctor.list', (err, res) => {
         if (err) return
-        self.doctors = res || []
+        self.doctors = res // test
     })
 });
 
@@ -22,38 +21,36 @@ Template.enter.events({
         if (!tc) return
         template.tc.set(tc)
 
-        const patient = await Meteor.callAsync('patient.listByTc', tc)
-        // console.log(patient);
+        const patient = await Meteor.callAsync('patient.showByTc', tc)
         if (!patient) {
             template.isRegistered.set(false)
+            template.doctor?.set(null)
         } else {
+            template.patientName = patient.name
+            template.isRegistered.set(true)
             Meteor.call('patient.updateJoinedQueAt', patient)
-            const doctor = await Meteor.callAsync('doctor.listByUserId', patient.doctorId)
+            const doctor = await Meteor.callAsync('doctor.showByUserId', patient.doctorId)
             template.doctor.set(doctor)
         }
-        AppUtil.refreshToken.set(AppUtil.refreshToken.get() + 1)
-        console.log(AppUtil.refreshToken.get());
+
     },
-    'submit .register': async function (event, template) {
-        event.preventDefault() //To do
+    'submit .register': function (event, template) {
+        event.preventDefault()
+        const tc = template.tc.get()
         const name = event.target.name.value
         const surname = event.target.surname.value
-        const tc = template.tc.get()
         const gender = event.target.gender.value
         const age = event.target.age.value
         const doctorId = event.target.doctor.value
         const user = { name, surname, gender, age, tc, doctorId }
+        Meteor.call("patient.create", user)
 
-        try {
-            await Meteor.callAsync("patient.create", user)
-            template.isSucceed.set(true)
-            Meteor.setTimeout(function () {
-                template.isRegistered.set(true)
-            }, 2000);
-        } catch (error) {
-            //ders izle
-            console.log(error);
-        }
+        template.isSucceed.set(true)
+        Meteor.setTimeout(function () {
+            template.isRegistered.set(true)
+            template.isSucceed.set(null)
+        }, 2000);
+
     }
 });
 
@@ -62,12 +59,13 @@ Template.enter.helpers({
         return Template.instance().isRegistered.get()
     },
     doctors: function () {
-        console.log('docs', Template.instance().doctors);
         return Template.instance().doctors
-        //return Doctors.find({}).fetch()
     },
     doctorName: function () {
         return Template.instance().doctor.get()?.name
+    },
+    patientName: function () {
+        return Template.instance().patientName.name
     },
     isSucceed: function () {
         return Template.instance().isSucceed.get()
