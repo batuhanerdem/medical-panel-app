@@ -1,5 +1,5 @@
 Meteor.methods({
-    'doctor.listByUserId'(userId) {
+    'doctor.showByUserId'(userId) {
         return Doctors.findOne({ userId })
     },
     'doctor.list'() {

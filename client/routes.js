@@ -9,6 +9,7 @@ FlowRouter.route('/', {
 
 FlowRouter.route("/login", {
   name: 'public.doctor',
+  triggersEnter: [MustLogout],
   action: function () {
     this.render("login");
   }
@@ -16,6 +17,10 @@ FlowRouter.route("/login", {
 
 FlowRouter.route("/doctor", {
   name: 'public.doctor',
+  triggersEnter: [MustLogin],
+  waitOn() {
+    return Meteor.subscribe('patient.listForQue', Meteor.userId())
+  },
   action: function () {
     this.render("doctor");
   }
@@ -30,6 +35,9 @@ FlowRouter.route("/patient", {
 
 FlowRouter.route("/patient/:id", {
   name: 'public.patient.id',
+  waitOn(params) {
+    return Meteor.subscribe('patient.listForQue', params.id)
+  },
   action: function (params, queryparams) {
     this.render("patient");
   }

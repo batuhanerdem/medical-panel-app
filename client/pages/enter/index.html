@@ -1,19 +1,26 @@
 <template name="enter">
+  {{>homePage}}
+
   <div class=top>
     <form class="tc layout">
       <label for="exampleInputPassword1">Tc</label>
-      <input type="number" class="form-control" min="1000000000" max="99999999999" id="exampleInputPassword1" name="tc"
+      <input type="number" class="form-control" min="10000000000" max="99999999999" id="exampleInputPassword1" name="tc"
         placeholder="Enter tc number">
       <button type="submit" class="btn btn-primary btn-tc">Sorgula</button>
     </form>
+
     {{#if doctorName}}
       <div class="doctor-info">
-        <span>Kayitli oldugu doktor adi:</span>
-        <h5> {{doctorName}}</h5>
+        <div class="doctor-name-container">
+          <span class="doctor-label">Adı:</span>
+          <span class="doctor-label">{{patientName}}</span>
+
+          <span class="doctor-label">Kayıtlı olduğu doktorun adı:</span>
+          <span class="doctor-name">{{doctorName}}</span>
+        </div>
       </div>
     {{/if}}
   </div>
-
 
   {{#unless isRegistered}}
     <span> Hasta kayitli degil</span>
