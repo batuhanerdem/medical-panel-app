@@ -6,7 +6,7 @@ Template.doctor.onCreated(function () {
 Template.doctor.onRendered(function () {
     const self = this
     this.autorun(function () {
-        Patients.find({}).fetch() //burada neden fetch etmedigimde dinlemeleri alamiyorum?
+        Patients.findOne({})
         Meteor.call('patient.showFirstPatient', (err, res) => {
             if (err) return
             self.patient.set(res)

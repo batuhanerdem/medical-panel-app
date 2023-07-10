@@ -36,5 +36,4 @@ Template.patient.helpers({
     doctor: function () {
         return Template.instance().doctor.get()
     },
-    eq: function (a, b) { return a == b }//lib'e tasinacak
 });
