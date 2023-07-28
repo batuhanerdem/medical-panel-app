@@ -3,7 +3,7 @@ import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 FlowRouter.route('/', {
   name: 'public.home',
   action: function (params, queryParams) {
-    this.render('homePage');
+    this.render("defaultLayout", { page: "login" });
   }
 });
 
@@ -11,7 +11,7 @@ FlowRouter.route("/login", {
   name: 'public.doctor',
   triggersEnter: [MustLogout],
   action: function () {
-    this.render("login");
+    this.render("defaultLayout", { page: "login" });
   }
 });
 
@@ -22,14 +22,14 @@ FlowRouter.route("/doctor", {
     return Meteor.subscribe('patient.listForQue', Meteor.userId())
   },
   action: function () {
-    this.render("doctor");
+    this.render("defaultLayout", { page: "doctor" });
   }
 });
 
 FlowRouter.route("/patient", {
   name: 'public.patient',
   action: function () {
-    this.render("patient");
+    this.render("defaultLayout", { page: "patient" });
   }
 });
 
@@ -39,20 +39,20 @@ FlowRouter.route("/patient/:id", {
     return Meteor.subscribe('patient.listForQue', params.id)
   },
   action: function () {
-    this.render("patient");
+    this.render("defaultLayout", { page: "patient" });
   }
 });
 
 FlowRouter.route("/register", {
   name: 'public.register',
   action: function () {
-    this.render("register")
+    this.render("defaultLayout", { page: "register" });
   }
 });
 
 FlowRouter.route("/enter", {
   name: 'public.enter',
   action: function () {
-    this.render("enter")
+    this.render("defaultLayout", { page: "enter" });
   }
 })

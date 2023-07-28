@@ -3,15 +3,30 @@ import { Meteor } from 'meteor/meteor'
 Template.enter.onCreated(function () {
     const self = this
 
+    this.error = new ReactiveVar(null)
     this.tc = new ReactiveVar()
     this.doctor = new ReactiveVar()
     this.isRegistered = new ReactiveVar(true)
     this.isSucceed = new ReactiveVar(false)
 
-    Meteor.call('doctor.list', (err, res) => {
+    Meteor.call('doctor.listNamesAndIds', (err, res) => {
         if (err) return
-        self.doctors = res // test
+        this.doctors = res
     })
+
+    this.updateAfterAddingQue = async (patient) => {
+        const doctor = await Meteor.callAsync('doctor.showByUserId', patient.doctorId)
+        this.doctor.set(doctor)
+        this.patientName = patient.name
+    }
+
+    this.showSucceedMessageForTwoSecs = () => {
+        this.isSucceed.set(true)
+        Meteor.setTimeout(() => {
+            this.isRegistered.set(true)
+            this.isSucceed.set(null)
+        }, 2000);
+    }
 });
 
 Template.enter.events({
@@ -21,36 +36,49 @@ Template.enter.events({
         if (!tc) return
         template.tc.set(tc)
 
-        const patient = await Meteor.callAsync('patient.showByTc', tc)
-        if (!patient) {
-            template.isRegistered.set(false)
-            template.doctor?.set(null)
-        } else {
-            template.patientName = patient.name
-            template.isRegistered.set(true)
-            Meteor.call('patient.updateJoinedQueAt', patient)
-            const doctor = await Meteor.callAsync('doctor.showByUserId', patient.doctorId)
-            template.doctor.set(doctor)
+        try {
+            const patient = await Meteor.callAsync('patient.showByTc', { tc })
+            template.error.set(null)
+
+            if (!patient) {
+                template.isRegistered.set(false)
+                template.doctor.set(null)
+            } else {
+                template.isRegistered.set(true)
+                Meteor.call('patient.updateJoinedQueAt', patient)
+                template.updateAfterAddingQue(patient)
+            }
+        } catch (error) {
+            template.isRegistered.set(true)// bir hata varsa kayit formu kapansin
+
+            if (error.reason == "Tc failed regular expression validation") {
+                template.error.set("Lutfen gecerli bir tc giriniz")
+            } else {
+                console.log(error);
+            }
         }
-
     },
-    'submit .register': function (event, template) {
+
+    'submit .register': async function (event, template) {
         event.preventDefault()
-        const tc = template.tc.get()
-        const name = event.target.name.value
-        const surname = event.target.surname.value
-        const gender = event.target.gender.value
-        const age = event.target.age.value
-        const doctorId = event.target.doctor.value
-        const user = { name, surname, gender, age, tc, doctorId }
-        Meteor.call("patient.create", user)
+        const { name, surname, gender, birthYear, doctor } = event.target;
 
-        template.isSucceed.set(true)
-        Meteor.setTimeout(function () {
-            template.isRegistered.set(true)
-            template.isSucceed.set(null)
-        }, 2000);
+        const patient = {
+            name: name.value,
+            surname: surname.value,
+            gender: gender.value,
+            birthYear: birthYear.value,
+            tc: template.tc.get(),
+            doctorId: doctor.value,
+        };
 
+        try {
+            await Meteor.callAsync("patient.create", patient);
+            template.updateAfterAddingQue(patient);
+            template.showSucceedMessageForTwoSecs();
+        } catch (error) {
+            console.log("catch", error);
+        }
     }
 });
 
@@ -62,12 +90,15 @@ Template.enter.helpers({
         return Template.instance().doctors
     },
     doctorName: function () {
-        return Template.instance().doctor.get()?.name
+        return Template.instance().doctor.get()?.profile.name
     },
     patientName: function () {
-        return Template.instance().patientName.name
+        return Template.instance().patientName
     },
     isSucceed: function () {
         return Template.instance().isSucceed.get()
+    },
+    error: function () {
+        return Template.instance().error.get()
     }
 });

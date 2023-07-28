@@ -1,7 +1,5 @@
-import { Meteor } from 'meteor/meteor'
 import { Accounts } from 'meteor/accounts-base'
 import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
-
 
 Template.register.events({
     'submit form': function (event, template) {
@@ -17,7 +15,6 @@ Template.register.events({
             username, password, profile: {
                 tc,
                 name,
-                createdAt: new Date(),
                 surname
             }
         }

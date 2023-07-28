@@ -1,19 +1,19 @@
 <template name="patient">
   <br>
   <nav class="doktorlar">
-    <ul>
-      {{#each doctors}}
-        <a href="{{pathFor 'public.patient.id' id=userId}}">Dr. {{name}}</a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      {{#each doctorNames}}
+        <a class="col nav-link" href="{{pathFor 'public.patient.id' id=id}}">Dr. {{name}}</a>
       {{/each}}
-    </ul>
+    </nav>
   </nav>
 
   <div class="doctor-card">
-    <h3>Doktor: {{doctor.name}}</h3>
+    <h3>Doktor: {{doctorName}}</h3>
   </div>
 
   {{#each patients}}
-    <div class="patient-card {{#if eq status 'in-progress'}} text-danger {{/if}} doctor-card">
+    <div class="patient-card {{#if eq status 'in-progress'}} text-danger {{/if}}">
       <h3>{{name}}</h3>
     </div>
   {{/each}}

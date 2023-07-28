@@ -1,0 +1,13 @@
+.containerDefaultLayout {
+  display: flex;
+  flex-direction: column;
+  background-color: burlywood;
+  align-items: flex-start;
+  height: 100vh; 
+  width: 100vw;
+}
+
+.page{
+  align-self: flex-start;
+  justify-self: flex-start;
+}
