@@ -1,19 +1,26 @@
 <template name="enter">
-  <div class=top>
+  <div class="top layout">
     <form class="tc layout">
       <label for="exampleInputPassword1">Tc</label>
       <input type="text" class="form-control" maxlength="11" id="exampleInputPassword1" name="tc"
         placeholder="Enter tc number">
-      <button type="submit" class="btn btn-primary btn-tc">Sorgula</button>
+      <button type="submit" class="btn btn-primary btn-tc mt-4">Sorgula</button>
     </form>
 
     {{#if doctorName}}
       <div class="doctor-info">
         <div class="doctor-name-container">
-          <span class="doctor-label">Adı:</span>
-          <span class="doctor-label">{{patientName}}</span>
+          <div class="card text-white mb-3 patient-card-enter" style="max-width: 22rem;">
+            <div class="card-body">
+              <h5 class="card-title">Hasta Bilgileri</h5>
+              <p class="card-text"><strong>Ad:</strong> {{patientData.name}}</p>
+              <p class="card-text"><strong>Soyad:</strong> {{patientData.surname}}</p>
+              <p class="card-text"><strong>Tc:</strong> {{patientData.tc}}</p>
+              <p class="card-text"><strong>Doktor Adi:</strong> {{doctorName}}</p>
+              <p class="card-text"><strong>Gelme sayisi:</strong> {{patientData.visitCount}}</p>
 
-          <span class="doctor-label">Kayıtlı olduğu doktorun adı: {{doctorName}}</span>
+            </div>
+          </div>
         </div>
       </div>
     {{/if}}
@@ -25,40 +32,29 @@
 
 
   {{#unless isRegistered}}
-    <span> Hasta kayitli degil</span>
-    <form class="register layout">
-      <div class="form-group">
-        <label for="exampleInputEmail1">Name</label>
-        <input type="text" class="form-control" id="exampleInputEmail1" name="name" placeholder="Enter name">
-      </div>
-      <div class="form-group">
-        <label for="exampleInputEmail1">Surname</label>
-        <input type="text" class="form-control" id="exampleInputEmail1" name="surname" placeholder="Enter surname">
-      </div>
-      <div class="form-group">
-        <label>Birth Year</label>
-        <input type="year" class="form-control" id="exampleInputEmail1" name="birthYear" placeholder="Enter year">
-      </div>
-      <br>
-      <div class="form-group">
-        <label>Gender</label>
-        <select class="custom-select mr-sm-2" name="gender" id="inlineFormCustomSelect">
-          <option selected>Choose</option>
-          <option value="Male">Male</option>
-          <option value="Female">Female</option>
-        </select>
-      </div>
 
-      <div class="form-group">
-        <label>Doctor</label>
-        <select class="custom-select mr-sm-2" name="doctor" id="inlineFormCustomSelect2">
-          <option selected>Choose</option>
-          {{#each doctors}}
-            <option value={{id}}>{{name}}</option>
-          {{/each}}
-        </select>
-      </div>
-      <br>
+    <form class="register layout mt-0">
+      <h4 class="fw-normal mb-1 pb-2 mt-0" style="letter-spacing: 1px;">Hastayi kaydet</h4>
+      <label for="exampleInputEmail1">Name</label>
+      <input type="text" class="form-control" id="exampleInputEmail1" name="name" placeholder="Enter name">
+      <label for="exampleInputEmail1">Surname</label>
+      <input type="text" class="form-control" id="exampleInputEmail1" name="surname" placeholder="Enter surname">
+      <label>Birth Year</label>
+      <input type="year" class="form-control" id="exampleInputEmail1" name="birthYear" placeholder="Enter year">
+      <label>Gender</label>
+      <select class="custom-select mr-sm-2" name="gender" id="inlineFormCustomSelect">
+        <option selected>Choose</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+
+      <label>Doctor</label>
+      <select class="custom-select mr-sm-2" name="doctor" id="inlineFormCustomSelect2">
+        <option selected>Choose</option>
+        {{#each doctors}}
+          <option value={{id}}>{{name}}</option>
+        {{/each}}
+      </select>
       <button type="submit" class="btn btn-primary btn-form">Kaydet</button>
     </form>
     {{#if isSucceed}}

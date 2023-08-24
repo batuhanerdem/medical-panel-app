@@ -8,7 +8,7 @@ new ValidatedMethod({
 
         if (!isVerifyed) throw new Meteor.Error("Tc isim uyumsuzlugu")
 
-        //Patients.insert(patient)
+        Patients.insert(patient)
         console.log("kayit edildi");
         return true
     }

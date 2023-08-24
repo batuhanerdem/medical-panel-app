@@ -1,11 +1,11 @@
 <template name="homePage">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="row">
-      <a class="col nav-link" href="doctor">Doctor Page</a>
-      <a class="col nav-link" href="patient">Patient Page</a>
-      <a class="col nav-link" href="enter">Enter Page</a>
-      <a class="col nav-link" href="login">Login Page</a>
-      <a class="col nav-link" href="register">Register Page</a>
-    </div>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light p-3">
+    <a class="col nav-link" href="{{pathFor 'public.doctor'}}">Doctor Page</a>
+    <a class="col nav-link" href="{{pathFor 'public.patient'}}">Patient Page</a>
+    <a class="col nav-link" href="{{pathFor 'public.enter'}}">Enter Page</a>
+    <a class="col nav-link" href="{{pathFor 'public.login'}}">Login Page</a>
+    <a class="col nav-link" href="{{pathFor 'public.register'}}">Register Page</a>
+    <a class="col nav-link" href="{{pathFor 'public.chat'}}">Chat Page</a>
+
   </nav>
 </template>

@@ -1,0 +1,96 @@
+.pagesChat {
+
+
+    .brd-chat-content {
+  
+      height: 400px;
+  
+    }
+  
+    .brd-chat-input {
+      height: 50px;
+  
+      &.form-control:focus {
+        box-shadow: unset !important
+      }
+    }
+  
+    .brd-chat-message-item{
+      max-width: 300px;
+      width: 300px;
+    }
+  
+  
+  
+  }
+
+
+  // .user-sidebar {
+  //   width: 25%;
+  //   float: left;
+  //   background-color: #f0f0f0;
+  //   padding: 20px;
+  // }
+  
+  // .chat-window {
+  //   width: 75%;
+  //   float: left;
+  //   min-height: 80%;
+  //   padding: 20px;
+  //   background-color: white;
+  // }
+  
+  // .chat-messages {
+  //   max-height: 300px;
+  //   overflow-y: auto;
+  //   margin-bottom: 10px;
+  // }
+  
+  // .chat-input input {
+  //   width: 70%;
+  //   padding: 8px;
+  //   border: 1px solid #ccc;
+  //   border-radius: 4px;
+  // }
+  
+  // .chat-input button {
+  //   padding: 8px 16px;
+  //   background-color: #007bff;
+  //   color: white;
+  //   border: none;
+  //   border-radius: 4px;
+  //   cursor: pointer;
+  // }
+
+
+  .user-sidebar {
+    padding: 1rem;
+    font-size: 1.2rem;
+    width: min-content;
+  }
+  
+  .chat-window {
+    background-color: #f9f9f9;
+    padding: 1rem;
+    font-family: "Arial", sans-serif;
+    min-height: 400px; // Mesaj bölümünün minimum yüksekliği
+    display: flex;
+    flex-direction: column;
+  }
+  
+
+  .chat-messages {
+    flex-grow: 1;
+    max-height: calc(100% - 50px); // Mesaj bölümünün maksimum yüksekliği (ekrana sığması için)
+    overflow-y: auto;
+    margin-bottom: 10px;
+  }
+
+  .chat-input {
+    background-color: #f0f0f0;
+    margin-top: 1rem;
+  
+    input {
+      font-size: 1rem;
+    }
+  }

@@ -1,16 +1,17 @@
 <template name="doctor">
   {{#if patient}}
-    <div class="patient-info">
-
+    <div class="patient-info mt-5 bg-info">
       <h2>{{patient.name}}</h2>
       <p><strong>Yaş:</strong> {{patient.age}}</p>
       <p><strong>Cinsiyet:</strong> {{patient.gender}}</p>
       <p><strong>Tc:</strong> {{patient.tc}}</p>
+      <p><strong>Gelme sayisi:</strong> {{patient.visitCount}}</p>
 
-      <div class="add-note">
+      <div class="add-note mt-1">
         <form class="add-note-form">
           <div class="note-input">
-            <textarea id="not-ekle-input" name="note" placeholder="Notunuzu buraya yazın"></textarea>
+            <textarea class="note-ekle-input" id="not-ekle-input" name="note"
+              placeholder="Notunuzu buraya yazın"></textarea>
           </div>
           <div class="note-button">
             <button type="submit" id="not-ekle-btn">Sonraki hasta</button>
@@ -19,8 +20,8 @@
       </div>
     </div>
   {{else}}
-    <div class="no-patient-alert">
-      <h5>HICBIR HASTA YOK</h5>
+    <div class="no-patient-alert mt-5">
+      <h5>HICBIR HASTA YOK :(</h5>
     </div>
   {{/if}}
 </template>

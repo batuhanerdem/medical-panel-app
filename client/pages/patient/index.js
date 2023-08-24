@@ -11,8 +11,10 @@ Template.patient.onCreated(function () {
         this.doctorNames.set(res)
     })
 
+    if (!this.id) return
     Meteor.call('doctor.showByUserId', this.id, (err, res) => {
         if (err) return
+        console.log(res);
         this.doctor.set(res.profile)
     })
 })
@@ -34,6 +36,6 @@ Template.patient.helpers({
         return patients
     },
     doctorName: function () {
-        return Template.instance().doctor.get().name
+        return Template.instance().doctor.get()?.name
     },
 });

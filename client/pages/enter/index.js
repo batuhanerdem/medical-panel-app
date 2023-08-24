@@ -17,7 +17,7 @@ Template.enter.onCreated(function () {
     this.updateAfterAddingQue = async (patient) => {
         const doctor = await Meteor.callAsync('doctor.showByUserId', patient.doctorId)
         this.doctor.set(doctor)
-        this.patientName = patient.name
+        this.patient = patient
     }
 
     this.showSucceedMessageForTwoSecs = () => {
@@ -51,8 +51,9 @@ Template.enter.events({
         } catch (error) {
             template.isRegistered.set(true)// bir hata varsa kayit formu kapansin
 
-            if (error.reason == "Tc failed regular expression validation") {
+            if (error.message == "Tc failed regular expression validation [schema-error]") {
                 template.error.set("Lutfen gecerli bir tc giriniz")
+                console.log(error);
             } else {
                 console.log(error);
             }
@@ -78,6 +79,11 @@ Template.enter.events({
             template.showSucceedMessageForTwoSecs();
         } catch (error) {
             console.log("catch", error);
+            if (error.message == "[Tc isim uyumsuzlugu]") {
+                template.error.set("Isim ve Tc uyusmamaktadir")
+            } else {
+                console.log(error);
+            }
         }
     }
 });
@@ -92,8 +98,8 @@ Template.enter.helpers({
     doctorName: function () {
         return Template.instance().doctor.get()?.profile.name
     },
-    patientName: function () {
-        return Template.instance().patientName
+    patientData: function () {
+        return Template.instance().patient
     },
     isSucceed: function () {
         return Template.instance().isSucceed.get()

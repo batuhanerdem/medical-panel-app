@@ -1,6 +1,6 @@
 Template.homePage.onCreated(function () {
 
-    const patient = { tc: '50503650240', name: "Batuhan", surname: "Erdem", age: "22" }
+    const patient = { tc: '50503650240', name: "Batuhan", surname: "Erdem", birhYear: '2001' }
 
     // Meteor.call("patient.createTest", patient, (error, res) => {
 

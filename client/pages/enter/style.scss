@@ -25,21 +25,35 @@ span{
     background-color: #f5f5f5;
   }
   
-  .doctor-name {
+.doctor-name {
     font-size: 18px;
     font-weight: bold;
     margin-left: 10px;
-  }
-  .doctor-name-container {
+}
+.doctor-name-container {
     display: flex;
     align-items: center;
-  }
+}
   
-  .doctor-label {
+.doctor-label {
     font-weight: bold;
     margin-right: 5px;
-  }
-  .top{
+}
+.top{
     display: flex;
     width: max-content;
-  }
+}
+.form-control{
+    width: 25vh;
+}
+label{
+  margin-top: 10px;
+}
+
+.card-text{
+    text-overflow: ellipsis;
+}
+
+.patient-card-enter{
+    background-color: rgb(15, 178, 58);
+}

@@ -1,9 +1,10 @@
 
-  .patient-card {
-    width: 100vh;
+ .patient-card {
+    // width: 100vh;
     text-align: center;
     padding: 20px;
     margin-bottom: 10px;
+    align-self: center;
     border: 4px solid #ccc;
     border-radius: 10px;
   }
@@ -14,9 +15,6 @@
   .doctor-card{
     margin-top: 10px;
     text-align: center;
-  }
-  body {
-    font-family: Arial, sans-serif;
   }
   
   // header {
@@ -29,38 +27,19 @@
   nav.doktorlar {
     background-color: #f2f2f2;
     padding: 10px;
-  }
-  
-  nav.doktorlar ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+    margin-top: 20px;
     text-align: center;
+
   }
-  
-  nav.doktorlar ul li {
-    display: inline-block;
-  }
-  
-  nav.doktorlar ul li a {
+  nav.doktorlar a {
     display: block;
-    padding: 10px 20px;
-    text-decoration: none;
-    color: #333;
+    color: #700404;
   }
   
-  nav.doktorlar ul li a:hover {
-    background-color: #ddd;
+  nav.doktorlar a:hover {
+    background-color: #e5e5ec;
   }
   
   main {
     padding: 20px;
-  }
-  
-  .detay {
-    background-color: #fff;
-    padding: 20px;
-    max-width: 400px;
-    margin: 0 auto;
-    text-align: center;
   }

@@ -6,10 +6,9 @@ Meteor.methods({
     'doctor.listNamesAndIds'() {
         const doctors = Meteor.users.find({}).fetch()
         const doctorDict = []
-        for (number in doctors) {
-            currentDoctor = doctors[number]
-            const dict = { id: currentDoctor._id, name: currentDoctor.profile.name }
-            doctorDict.push(dict)
+        for (doctor of doctors) {
+            const dictObj = { id: doctor._id, name: doctor.profile.name }
+            doctorDict.push(dictObj)
         }
         return doctorDict
     }

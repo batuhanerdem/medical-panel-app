@@ -26,19 +26,18 @@
   justify-content: center;
   margin-top: 50px;
 }
+.add-note{
+  max-width: 100%;
 
+}
 .add-note textarea {
   margin-top: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
-  max-width: 400px;
-  width: 100%;
-  height: 100px;
-  padding: 8px;
-  resize: vertical;
-  margin-bottom: 10px;
+  max-width: 100%;
+}
+
+.note-input{
+  max-width: 100%;
 }
 
 .add-note button {
@@ -53,4 +52,8 @@
 .no-patient-alert {
   display: flex;
   justify-content: center;
+}
+
+.note-button{
+  max-width: 100%;
 }
