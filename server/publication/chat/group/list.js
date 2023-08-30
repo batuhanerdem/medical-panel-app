@@ -1,9 +1,9 @@
 Meteor.publish(
-    'groups.list', function () {
+    'rooms.list', function () {
         const myId = Meteor.userId()
-        const groups = Chats.find({
+        const rooms = Chats.find({
             members: { $elemMatch: { _id: myId } }
         })
-        return groups
+        return rooms
     }
 )

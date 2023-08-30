@@ -4,15 +4,8 @@ new ValidatedMethod({
     validate: MessageSchema.omit("sendersId", "sentAt").validator(),
     run(message) {
         if (!Meteor.userId()) return
-        if (!checkForPermissionToChat(message.chatId)) return
+        if (!checkForPermissionToChat(message.chatId)) return //mixin seklinde yaz
         Messages.insert(message)
         return true
     }
 });
-
-
-//userlerin adlari ve idleri pub edilecek
-//currentChat icinde bulundugun chati tut. frontend den gondermek icin
-// signed mixin
-//chatId'yi members'a gore pub et
-//

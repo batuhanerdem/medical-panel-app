@@ -4,8 +4,3 @@ Meteor.publish(
         return patients
     }
 )
-Meteor.publish(
-    'another.pub', function () {
-        return Meteor.users.find({})
-    }
-)

@@ -7,32 +7,14 @@ FlowRouter.route('/', {
   }
 });
 
-FlowRouter.route("/login", {
-  name: 'public.login',
-  triggersEnter: [MustLogout],
-  action: function () {
-    this.render("defaultLayout", { page: "login" });
-  }
-});
-
 FlowRouter.route("/doctor", {
   name: 'public.doctor',
   triggersEnter: [MustLogin],
   waitOn() {
     return Meteor.subscribe('patient.listForQue')
-
   },
   action: function () {
     this.render("defaultLayout", { page: "doctor" });
-  }
-});
-
-
-FlowRouter.route("/register", {
-  name: 'public.register',
-  triggersEnter: [MustLogout],
-  action: function () {
-    this.render("defaultLayout", { page: "register" });
   }
 });
 
@@ -66,7 +48,7 @@ FlowRouter.route("/chat", {
   waitOn(params) {
     return [
       Meteor.subscribe('doctor.list'),
-      Meteor.subscribe('groups.list')
+      Meteor.subscribe('rooms.list')
     ]
   },
   action: function () {
@@ -75,7 +57,6 @@ FlowRouter.route("/chat", {
   }
 })
 
-
 FlowRouter.route("/chat/:chatId", {
   name: 'public.chat.chatId',
   triggersEnter: [MustLogin],
@@ -83,11 +64,10 @@ FlowRouter.route("/chat/:chatId", {
     return [
       Meteor.subscribe('doctor.list'),
       Meteor.subscribe('messages.list', params.chatId),
-      Meteor.subscribe('groups.list')
+      Meteor.subscribe('rooms.list')
     ]
   },
   action: function () {
     this.render("defaultLayout", { page: "chat" });
-    console.log("test23");
   }
 })

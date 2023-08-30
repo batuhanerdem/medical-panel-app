@@ -1,11 +1,14 @@
 import { Meteor } from 'meteor/meteor'
 
+//swalfire
+
 Template.enter.onCreated(function () {
     const self = this
 
     this.error = new ReactiveVar(null)
     this.tc = new ReactiveVar()
     this.doctor = new ReactiveVar()
+    this.patient = new ReactiveVar()
     this.isRegistered = new ReactiveVar(true)
     this.isSucceed = new ReactiveVar(false)
 
@@ -17,7 +20,8 @@ Template.enter.onCreated(function () {
     this.updateAfterAddingQue = async (patient) => {
         const doctor = await Meteor.callAsync('doctor.showByUserId', patient.doctorId)
         this.doctor.set(doctor)
-        this.patient = patient
+        this.patient.set(patient)
+        console.log(patient);
     }
 
     this.showSucceedMessageForTwoSecs = () => {
@@ -99,7 +103,8 @@ Template.enter.helpers({
         return Template.instance().doctor.get()?.profile.name
     },
     patientData: function () {
-        return Template.instance().patient
+        console.log(Template.instance().patient.get().visitCount);
+        return Template.instance().patient.get()
     },
     isSucceed: function () {
         return Template.instance().isSucceed.get()

@@ -2,7 +2,7 @@ import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
 
 Template.chat.onCreated(function () {
-    this.chatId = ReactiveVar()
+    this.chatId = FlowRouter.getParam('chatId')
 });
 
 Template.chat.onRendered(function () {
@@ -26,6 +26,17 @@ Template.chat.onRendered(function () {
     })
 });
 
+Template.chat.events({
+    'submit form': function (event, template) {
+        event.preventDefault();
+        const text = event.target.text.value;
+        chatId = template.chatId
+        const message = { text, chatId }
+        if (!message.text == "") Meteor.call('message.create', message)
+        event.target.reset()
+    }
+});
+
 
 Template.chat.helpers({
     users: function () {
@@ -33,13 +44,13 @@ Template.chat.helpers({
 
         return users
     },
-    groups: function () {
-        const groups = Chats.find().fetch()
-        console.log("groups:", groups);
-        return groups
+    rooms: function () {
+        const rooms = Chats.find().fetch()
+        console.log("rooms:", rooms);
+        return rooms
     },
     messages: function () {
-        const chatId = FlowRouter.getParam('chatId');
+        const chatId = Template.instance().chatId
         const messages = Messages.find({ chatId }).fetch()
         return messages
     },
