@@ -1,12 +1,13 @@
 <template name="chat">
     <div class="container mt-4">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="user-sidebar bg-light p-3">
-                    <h2>Kullanıcılar</h2>
+                    <h2>Gruplar</h2>
                     <ul class="list-group">
                         {{#each rooms}}
-                            <a href="{{pathFor 'public.chat.chatId' chatId=_id}}" class=" list-group-item">{{name}}</a>
+                            <a href="{{pathFor 'public.chat.chatId' chatId=_id}}"
+                                class=" list-group-item {{#if eq selectedRoom _id}} text-primary{{/if}}">{{name}}</a>
                         {{/each}}
                     </ul>
                 </div>
@@ -16,8 +17,10 @@
                     <div class="chat-window bg-white p-3">
                         <div class="chat-messages row" id="chat-messages">
                             {{#each messages}}
-                                <span class="fw-light text-muted small">{{findSendersNameById sendersId}}:</span>
-                                <span class="fw-normal textSpan">{{text}}</span>
+                                <div class="column">
+                                    <em class="fw-light text-muted small">{{findSendersNameById sendersId}}:</em>
+                                    <em class="fw-normal textSpan">{{text}}</em>
+                                </div>
                             {{/each}}
                         </div>
                         <div class="chat-input input-group mt-3">

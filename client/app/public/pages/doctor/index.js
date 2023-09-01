@@ -18,7 +18,7 @@ Template.doctor.events({
     'submit .add-note': function (event, template) {
         event.preventDefault()
         const note = event.target.note.value
-        Meteor.call('patient.updateNotesAndGoNext', template.patient.get(), note)
+        Meteor.call('patient.updateNotesAndGoNext', { patient: template.patient.get(), note })
         event.target.reset()
     }
 });

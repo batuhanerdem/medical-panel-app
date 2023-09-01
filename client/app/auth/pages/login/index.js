@@ -1,4 +1,3 @@
-import { event } from 'jquery';
 import { Meteor } from 'meteor/meteor';
 import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
@@ -12,9 +11,7 @@ Template.login.events({
         const username = event.target.username.value
         const password = event.target.password.value
         Meteor.loginWithPassword({ username }, password, function (error) {
-            error ? console.log(error.message) : FlowRouter.go(template.pageToGo)
-            // su an useless, zaten login yapan doctor, doctor page en gidiyor
-            // baska yerde de kontrol yok.
+            error ? errorHandler(error) : FlowRouter.go(template.pageToGo)
         })
     }
 });

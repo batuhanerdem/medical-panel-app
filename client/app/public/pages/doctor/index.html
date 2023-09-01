@@ -1,22 +1,30 @@
 <template name="doctor">
   {{#if patient}}
-    <div class="patient-info mt-5 bg-info">
-      <h2>{{patient.name}}</h2>
-      <p><strong>Dogum yili:</strong> {{patient.birthYear}}</p>
-      <p><strong>Cinsiyet:</strong> {{patient.gender}}</p>
-      <p><strong>Tc:</strong> {{patient.tc}}</p>
-      <p><strong>Gelme sayisi:</strong> {{patient.visitCount}}</p>
+    <div class="card text-white patient-card-enter mt-5">
+      <div class="card-body text-info">
+        <h5 class="card-title"><strong>Ad: </strong>{{patient.name}} <strong>Soyad: </strong>{{patient.surname}}</h5>
+        <p><strong>Dogum yili:</strong> {{patient.birthYear}}</p>
+        <p><strong>Cinsiyet:</strong> {{patient.gender}}</p>
+        <p><strong>Tc:</strong> {{patient.tc}}</p>
+        <p><strong>Gelme sayisi:</strong> {{patient.visitCount}}</p>
+        <!-- <div class="notlar d-flex column">
+          <p>Notlar: </p>
+          {{#each patient.notes}}
+            <li>{{this }}</li>
+          {{/each}}
+        </div> -->
 
-      <div class="add-note mt-1">
-        <form class="add-note-form">
-          <div class="note-input">
-            <textarea class="note-ekle-input" id="not-ekle-input" name="note"
-              placeholder="Notunuzu buraya yazın"></textarea>
-          </div>
-          <div class="note-button">
-            <button type="submit" id="not-ekle-btn">Sonraki hasta</button>
-          </div>
-        </form>
+        <div class="add-note mt-1">
+          <form class="add-note-form">
+            <div class="note-input">
+              <textarea class="note-ekle-input" id="not-ekle-input" name="note"
+                placeholder="Notunuzu buraya yazın"></textarea>
+            </div>
+            <div class="note-button">
+              <button type="submit" id="not-ekle-btn">Sonraki hasta</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   {{else}}

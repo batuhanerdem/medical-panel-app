@@ -10,7 +10,7 @@ FlowRouter.route('/', {
 FlowRouter.route("/doctor", {
   name: 'public.doctor',
   triggersEnter: [MustLogin],
-  waitOn() {
+  waitOn: function (params) {
     return Meteor.subscribe('patient.listForQue')
   },
   action: function () {
@@ -34,7 +34,7 @@ FlowRouter.route("/patient", {
 
 FlowRouter.route("/patient/:id", {
   name: 'public.patient.id',
-  waitOn(params) {
+  waitOn: function (params) {
     return Meteor.subscribe('patient.listForQue', params.id)
   },
   action: function () {
@@ -45,7 +45,7 @@ FlowRouter.route("/patient/:id", {
 FlowRouter.route("/chat", {
   name: 'public.chat',
   triggersEnter: [MustLogin],
-  waitOn(params) {
+  waitOn: function (params) {
     return [
       Meteor.subscribe('doctor.list'),
       Meteor.subscribe('rooms.list')
@@ -53,14 +53,13 @@ FlowRouter.route("/chat", {
   },
   action: function () {
     this.render("defaultLayout", { page: "chat" });
-
   }
 })
 
 FlowRouter.route("/chat/:chatId", {
   name: 'public.chat.chatId',
   triggersEnter: [MustLogin],
-  waitOn(params) {
+  waitOn: function (params) {
     return [
       Meteor.subscribe('doctor.list'),
       Meteor.subscribe('messages.list', params.chatId),

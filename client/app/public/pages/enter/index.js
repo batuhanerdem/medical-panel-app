@@ -1,16 +1,12 @@
 import { Meteor } from 'meteor/meteor'
 
-//swalfire
-
 Template.enter.onCreated(function () {
-    const self = this
-
-    this.error = new ReactiveVar(null)
-    this.tc = new ReactiveVar()
-    this.doctor = new ReactiveVar()
-    this.patient = new ReactiveVar()
-    this.isRegistered = new ReactiveVar(true)
-    this.isSucceed = new ReactiveVar(false)
+    this.state = new ReactiveDict(null, {
+        tc: null,
+        doctor: null,
+        patient: null,
+        isRegistered: true,
+    })
 
     Meteor.call('doctor.listNamesAndIds', (err, res) => {
         if (err) return
@@ -18,19 +14,12 @@ Template.enter.onCreated(function () {
     })
 
     this.updateAfterAddingQue = async (patient) => {
-        const doctor = await Meteor.callAsync('doctor.showByUserId', patient.doctorId)
-        this.doctor.set(doctor)
-        this.patient.set(patient)
-        console.log(patient);
+        const doctor = await Meteor.callAsync('doctor.showByUserId', { _id: patient.doctorId })
+        succesfullyRegistered({ patient, doctorName: doctor.profile.name })
+        this.state.set('doctor', doctor)
+        this.state.set('patient', patient)
     }
 
-    this.showSucceedMessageForTwoSecs = () => {
-        this.isSucceed.set(true)
-        Meteor.setTimeout(() => {
-            this.isRegistered.set(true)
-            this.isSucceed.set(null)
-        }, 2000);
-    }
 });
 
 Template.enter.events({
@@ -38,29 +27,22 @@ Template.enter.events({
         event.preventDefault()
         const tc = event.target.tc.value
         if (!tc) return
-        template.tc.set(tc)
+        template.state.set('tc', tc)
 
         try {
             const patient = await Meteor.callAsync('patient.showByTc', { tc })
-            template.error.set(null)
 
             if (!patient) {
-                template.isRegistered.set(false)
-                template.doctor.set(null)
+                template.state.set('isRegistered', false)
+                template.state.set('doctor', null)
             } else {
-                template.isRegistered.set(true)
-                Meteor.call('patient.updateJoinedQueAt', patient)
+                template.state.set('isRegistered', true)
+                Meteor.call('patient.updateJoinedQueAt', { _id: patient._id })
                 template.updateAfterAddingQue(patient)
             }
         } catch (error) {
-            template.isRegistered.set(true)// bir hata varsa kayit formu kapansin
-
-            if (error.message == "Tc failed regular expression validation [schema-error]") {
-                template.error.set("Lutfen gecerli bir tc giriniz")
-                console.log(error);
-            } else {
-                console.log(error);
-            }
+            template.state.set('isRegistered', true)
+            errorForTc(error)
         }
     },
 
@@ -73,43 +55,32 @@ Template.enter.events({
             surname: surname.value,
             gender: gender.value,
             birthYear: birthYear.value,
-            tc: template.tc.get(),
+            tc: template.state.get('tc'),
             doctorId: doctor.value,
         };
 
         try {
             await Meteor.callAsync("patient.create", patient);
             template.updateAfterAddingQue(patient);
-            template.showSucceedMessageForTwoSecs();
+            template.state.set('isRegistered', true)
         } catch (error) {
             console.log("catch", error);
-            if (error.message == "[Tc isim uyumsuzlugu]") {
-                template.error.set("Isim ve Tc uyusmamaktadir")
-            } else {
-                console.log(error);
-            }
+            errorHandler(error)
         }
     }
 });
 
 Template.enter.helpers({
     isRegistered: function () {
-        return Template.instance().isRegistered.get()
+        return Template.instance().state.get('isRegistered')
     },
     doctors: function () {
         return Template.instance().doctors
     },
     doctorName: function () {
-        return Template.instance().doctor.get()?.profile.name
+        return Template.instance().state.get('doctor')?.profile.name
     },
     patientData: function () {
-        console.log(Template.instance().patient.get().visitCount);
-        return Template.instance().patient.get()
-    },
-    isSucceed: function () {
-        return Template.instance().isSucceed.get()
-    },
-    error: function () {
-        return Template.instance().error.get()
+        return Template.instance().state.get('patient')
     }
 });

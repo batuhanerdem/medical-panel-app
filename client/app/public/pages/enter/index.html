@@ -11,7 +11,7 @@
       <div class="doctor-info">
         <div class="doctor-name-container">
           <div class="card text-white mb-3 patient-card-enter" style="max-width: 22rem;">
-            <div class="card-body">
+            <div class="card-body text-primary">
               <h5 class="card-title">Hasta Bilgileri</h5>
               <p class="card-text"><strong>Ad:</strong> {{patientData.name}}</p>
               <p class="card-text"><strong>Soyad:</strong> {{patientData.surname}}</p>
@@ -52,7 +52,7 @@
       <select class="custom-select mr-sm-2" name="doctor" id="inlineFormCustomSelect2">
         <option selected>Choose</option>
         {{#each doctors}}
-          <option value={{id}}>{{name}}</option>
+          <option value={{_id}}>{{profile.name}}</option>
         {{/each}}
       </select>
       <button type="submit" class="btn btn-primary btn-form">Kaydet</button>

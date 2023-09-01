@@ -7,7 +7,6 @@ SimpleSchema.defineValidationErrorTransform((error) => {
     ddpError.details = error.details
     return ddpError
 })
-Meteor.startup(() => {
 
-}
-);
+
+Meteor.startup(() => { });

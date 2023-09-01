@@ -2,8 +2,8 @@
 
   <nav class="doktorlar mx-5">
     <nav class="navbar navbar-expand-lg navbar-light bg-light p-3">
-      {{#each doctorNames}}
-        <a class="col nav-link" href="{{pathFor 'public.patient.id' id=id}}">Dr. {{name}}</a>
+      {{#each doctors}}
+        <a class="col nav-link" href="{{pathFor 'public.patient.id' id=_id}}">Dr. {{profile.name}}</a>
       {{/each}}
     </nav>
   </nav>
