@@ -1,32 +1,24 @@
 import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
 
-Template.chat.onCreated(function () {
-    this.chatId = FlowRouter.getParam('chatId')
-});
-
-Template.chat.onRendered(function () {
-    const self = this
-
-    const chat = {
-        members: [{ name: 'mj', _id: "1231" }, { _id: Meteor.userId() }], //membersi ve isGroupu burdan alicam
-        // name: "chatname"
+Template.chat.onCreated(async function () {
+    this.groupId = FlowRouter.getParam('groupId')
+    console.log(this.groupId);
+    const user = await Meteor.user()
+    console.log(user);
+    const grp = {
+        members: [{ _id: Meteor.userId(), name: await Meteor.user().profile.name }],
+        name: 'deneme'
     }
-    // Meteor.call('chat.insertDirect', chat)
-    // Meteor.call('chat.insertGroup', chat)
-
-    //  Meteor.call('message.create', message)
-    this.autorun(function () {
-
-    })
+    // Meteor.call('group.insert', grp)
 });
 
 Template.chat.events({
     'submit form': function (event, template) {
         event.preventDefault();
         const text = event.target.text.value;
-        const chatId = template.chatId
-        const message = { text, chatId }
+        const groupId = template.groupId
+        const message = { text, groupId }
         if (!message.text == "") Meteor.call('message.create', message)
         event.target.reset()
     }
@@ -38,14 +30,14 @@ Template.chat.helpers({
         const users = Meteor.users.find({ _id: { $ne: Meteor.userId() } }).fetch()
         return users
     },
-    rooms: function () {
-        const rooms = Chats.find().fetch()
-        console.log("rooms:", rooms);
-        return rooms
+    groups: function () {
+        const groups = Groups.find().fetch()
+        console.log("groups:", groups);
+        return groups
     },
     messages: function () {
-        const chatId = Template.instance().chatId
-        const messages = Messages.find({ chatId }).fetch()
+        const groupId = Template.instance().groupId
+        const messages = Messages.find({ groupId }).fetch()
         return messages
     },
     eq: function (v1, v2) {
@@ -54,9 +46,10 @@ Template.chat.helpers({
     findSendersNameById: function (sendersId) {
         const sender = Meteor.users.findOne({ _id: sendersId })
         console.log(sender);
-        return sender.username
+        return sender.profile.name
     },
-    selectedRoom: function () {
-        return Template.instance()?.chatId
+    selectedGroupId: function () {
+        const selectedGroupId = Template.instance().groupId
+        return selectedGroupId
     }
 });

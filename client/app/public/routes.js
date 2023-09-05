@@ -47,8 +47,26 @@ FlowRouter.route("/chat", {
   triggersEnter: [MustLogin],
   waitOn: function (params) {
     return [
+      console.log("calisiyor"),
       Meteor.subscribe('doctor.list'),
-      Meteor.subscribe('rooms.list')
+      Meteor.subscribe('groups.list')
+    ]
+  },
+  action: function () {
+    console.log("renderliyorum");
+
+    this.render("defaultLayout", { page: "chat" });
+  }
+})
+
+FlowRouter.route("/chat/:groupId", {
+  name: 'public.chat.groupId',
+  triggersEnter: [MustLogin],
+  waitOn: function (params) {
+    return [
+      Meteor.subscribe('doctor.list'),
+      Meteor.subscribe('messages.list', params.groupId),
+      Meteor.subscribe('groups.list')
     ]
   },
   action: function () {
@@ -56,17 +74,16 @@ FlowRouter.route("/chat", {
   }
 })
 
-FlowRouter.route("/chat/:chatId", {
-  name: 'public.chat.chatId',
-  triggersEnter: [MustLogin],
-  waitOn: function (params) {
-    return [
-      Meteor.subscribe('doctor.list'),
-      Meteor.subscribe('messages.list', params.chatId),
-      Meteor.subscribe('rooms.list')
-    ]
-  },
-  action: function () {
-    this.render("defaultLayout", { page: "chat" });
-  }
-})
+// test = async (context, redirect, stop) => {
+//   const user = await Meteor.user()
+//   console.log(user);
+//   if (user.profile.name == 'doctor1') redirect('/login')
+// }
+
+// FlowRouter.route("/test", {
+//   name: 'public.test',
+//   triggersEnter: [test],
+//   action: function () {
+//     this.render("defaultLayout");
+//   }
+// })

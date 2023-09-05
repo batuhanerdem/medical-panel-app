@@ -1,0 +1,49 @@
+[
+    {
+      "_id": "Cbsku77SoAGg6PFf5",
+      "members": [
+        {
+          "_id": "pDaLBsYJtNN8cJbz3",
+          "name": "doctor1"
+        },
+        {
+          "_id": "9S3gtLaiuyDrXEDvM",
+          "name": "doctor3"
+        },
+        {
+          "_id": "9S3gtLaiuyDrXEDvM",
+          "name": "doctor3"
+        },
+        {
+          "_id": "u4PFEiD8EwgF4Leyz",
+          "name": "123"
+        }
+      ],
+      "name": "GENEL",
+      "createdAt": "2023-09-01T19:56:26.396Z"
+    },
+    {
+      "_id": "3DBp6zD5wwWsXMpnP",
+      "name": "Nöroloji",
+      "members": [],
+      "createdAt": "2023-09-05T01:49:41.930Z"
+    },
+    {
+      "_id": "RPiPWiXLN4X6uPunm",
+      "name": "Psikiyatri",
+      "members": [],
+      "createdAt": "2023-09-05T01:49:41.930Z"
+    },
+    {
+      "_id": "wbcgS67QkkxYpfqqk",
+      "name": "Dermatoloji",
+      "members": [],
+      "createdAt": "2023-09-05T01:49:41.930Z"
+    },
+    {
+      "_id": "aukPHbS5fDEjucw6K",
+      "name": "Genel Cerrahi",
+      "members": [],
+      "createdAt": "2023-09-05T01:49:41.930Z"
+    }
+  ]

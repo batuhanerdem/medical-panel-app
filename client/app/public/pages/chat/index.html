@@ -1,62 +1,37 @@
-<template name="chat2">
-
-    <div class="pagesChat justify-content-between">
-        <div class="d-flex justify-content-between mb-2">
-            <h1 class="mb-0 text-white">Chat</h1>
-        </div>
-        <div class="row ">
-            <div class="col-md-3 row bg-info">
-                Users {{currentUser.profile.name}}
-                {{#each users}}
-                    <a>{{profile.name}}</a>
-                {{/each}}
-            </div>
-            <div class="col-md-2 row bg-info">
-                Users {{currentUser.profile.name}}
-                {{#each rooms}}
-                    <a>{{name}}</a>
-                {{/each}}
-            </div>
-            <div class="col-md-5">
-                <div class="card h-100">
-                    <div class="card-header">
-                        Chat
-                    </div>
-                    <div class="card-body d-flex flex-column gap-2 brd-chat-content overflow-auto">
-                        {{#if eq messages.length 0}}
-                            <div class="d-flex flex-column gap-2 py-4 text-center">
-                                <h4 class="mb-0 fw-bold">Hiç mesajlaşma yok</h4>
-                            </div>
-                        {{else}}
-
-                            <!-- {{#each messages}}
-                                {{#let _user=(getUser userId)}}
-                                    <div
-                                        class="d-flex flex-column gap-1 py-1 px-2 {{#if eq currentUser._id _user._id}}bg-warning align-self-end{{else}}bg-primary{{/if}} rounded-3 brd-chat-message-item">
-                                        <span class="fw-normal">{{payload.text}}</span>
-                                        <span class="fw-light text-muted small">{{_user.profile.firstName}}
-                                            {{_user.profile.lastName}}</span>
-                                    </div>
-                                {{/let}}
-
-                            {{/each}} -->
-                            {{#each messages}}
-                                <div
-                                    class="d-flex flex-column gap-1 py-1 px-2 {{#if eq currentUser._id sendersId}}bg-warning align-self-end{{else}}bg-primary{{/if}} rounded-3 brd-chat-message-item">
-                                    <span class="fw-normal">{{text}}</span>
-                                    <span class="fw-light text-muted small">{{_user.profile.lastName}}</span>
-                                </div>
-
-                            {{/each}}
-                        {{/if}}
-                    </div>
-
-                    <form class="card-footer p-1 d-flex">
-                        <input class="form-control border-0 rounded-0 brd-chat-input" type="text" name="text">
-                        <button type="submit" class="btn btn-success rounded-0"><i
-                                class="fas fa-paper-plane fa-fw"></i></button>
-                    </form>
+<template name="chat">
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="user-sidebar bg-light p-3">
+                    <h2>Gruplar</h2>
+                    <ul class="list-group">
+                        {{#each groups}}
+                            <a href="{{pathFor 'public.chat.groupId' groupId=_id}}"
+                                class=" list-group-item {{#if eq selectedGroupId _id}} text-primary{{/if}}">{{name}}</a>
+                        {{/each}}
+                    </ul>
                 </div>
+            </div>
+            <div class="col-md-8">
+                <form action="submit" class="chatForm">
+                    <div class="chat-window bg-white p-3">
+                        <div class="chat-messages row" id="chat-messages">
+                            {{#each messages}}
+                                <div class="column">
+                                    <em class="fw-light text-muted small">{{findSendersNameById sendersId}}:</em>
+                                    <em class="fw-normal textSpan">{{text}}</em>
+                                </div>
+                            {{/each}}
+                        </div>
+                        <div class="chat-input input-group mt-3">
+                            <input type="text" class="form-control" name="text" placeholder="Mesajınızı girin..."
+                                id="messageInput">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary sendButton" id="sendButton">Gönder</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

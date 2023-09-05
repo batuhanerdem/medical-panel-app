@@ -21,6 +21,14 @@
       <label>Tc Number</label>
       <input type="text" class="form-control" name="tc" placeholder="Tc No" />
     </div>
+    <div class="form-group">
+      <select name="profession">
+        {{#each professions}}
+          <option value={{this}}>{{this}}</option>
+        {{/each}}
+      </select>
+    </div>
+
     <div class="pt-1 mb-4">
       <button type="submit" class="btn btn-black btn-register bg-info mt-3">Register</button>
     </div>

@@ -34,3 +34,4 @@ mdg:validated-method
 fetch
 insecure
 reactive-dict
+percolate:migrations

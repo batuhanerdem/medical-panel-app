@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor'
 
 Template.enter.onCreated(function () {
+
     this.state = new ReactiveDict(null, {
         tc: null,
         doctor: null,
