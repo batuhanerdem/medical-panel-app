@@ -47,14 +47,11 @@ FlowRouter.route("/chat", {
   triggersEnter: [MustLogin],
   waitOn: function (params) {
     return [
-      console.log("calisiyor"),
       Meteor.subscribe('doctor.list'),
       Meteor.subscribe('groups.list')
     ]
   },
   action: function () {
-    console.log("renderliyorum");
-
     this.render("defaultLayout", { page: "chat" });
   }
 })
@@ -73,17 +70,3 @@ FlowRouter.route("/chat/:groupId", {
     this.render("defaultLayout", { page: "chat" });
   }
 })
-
-// test = async (context, redirect, stop) => {
-//   const user = await Meteor.user()
-//   console.log(user);
-//   if (user.profile.name == 'doctor1') redirect('/login')
-// }
-
-// FlowRouter.route("/test", {
-//   name: 'public.test',
-//   triggersEnter: [test],
-//   action: function () {
-//     this.render("defaultLayout");
-//   }
-// })

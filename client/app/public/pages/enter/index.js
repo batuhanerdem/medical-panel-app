@@ -65,7 +65,6 @@ Template.enter.events({
             template.updateAfterAddingQue(patient);
             template.state.set('isRegistered', true)
         } catch (error) {
-            console.log("catch", error);
             errorHandler(error)
         }
     }

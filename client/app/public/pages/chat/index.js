@@ -44,7 +44,7 @@ Template.chat.helpers({
         const members = group?.members
         let memberNames = []
         members?.forEach(member => {
-            memberNames.push(member.profile.name)
+            memberNames.push(member.name)
         });
         return memberNames
     }

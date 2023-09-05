@@ -4,7 +4,7 @@ import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 Template.patient.onCreated(function () {
     this.state = new ReactiveDict(null, {
         doctors: [],
-        doctor: null
+        currentDoctor: null
     })
     this.id = FlowRouter.getParam('id') || null
 
@@ -15,7 +15,7 @@ Template.patient.onCreated(function () {
     if (!this.id) return
     Meteor.call('doctor.showByUserId', { _id: this.id }, (err, res) => {
         if (err) return
-        this.state.set('doctor', res)
+        this.state.set('currentDoctor', res)
     })
 })
 
@@ -24,7 +24,6 @@ Template.patient.onRendered(function () {
     this.autorun(function () {
         Patients.find().fetch() // patients'i dinlemek icin
         Meteor.call("patient.updateFirstPatient", { doctorId: self.id })
-        console.log(self?.id);
     });
 });
 
@@ -38,7 +37,7 @@ Template.patient.helpers({
         return patients
     },
     doctorName: function () {
-        const currentDoctor = Template.instance().state.get('doctor')
+        const currentDoctor = Template.instance().state.get('currentDoctor')
         return currentDoctor?.profile.name
     },
 });

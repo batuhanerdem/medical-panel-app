@@ -12,8 +12,8 @@ new ValidatedMethod({
         if (!doctorId) return
         const patient = Patients.findOne({ status: { $ne: "not-in-que" }, doctorId }, { sort: { joinedQueAt: 1 } })
         if (!patient || patient.status == 'in-progress') return
-        Patients.update(patient, { $set: { status: "in-progress" } })
-        console.log("updated patient:", patient);
+        const updatedPatientNumber = Patients.update(patient, { $set: { status: "in-progress" } })
+        return updatedPatientNumber
     }
 })
 

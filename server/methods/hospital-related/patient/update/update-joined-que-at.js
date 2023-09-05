@@ -7,7 +7,6 @@ new ValidatedMethod({
     }).validator(),
     run({ _id }) {
         const patient = Patients.update({ _id }, { $set: { joinedQueAt: new Date(), status: "in-que" } })
-        console.log(patient);
         return patient
     }
 })
