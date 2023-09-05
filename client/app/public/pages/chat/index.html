@@ -15,10 +15,10 @@
             <div class="col-md-8">
                 <form action="submit" class="chatForm">
                     <div class="chat-window bg-white p-3">
-                        <div class="chat-messages row" id="chat-messages">
+                        <div class="chat-messages column" id="chat-messages">
                             {{#each messages}}
-                                <div class="column">
-                                    <em class="fw-light text-muted small">{{findSendersNameById sendersId}}:</em>
+                                <div class="column pt-1">
+                                    <em class="fw-bold text-muted ">{{findSendersNameById sendersId}}:</em>
                                     <em class="fw-normal textSpan">{{text}}</em>
                                 </div>
                             {{/each}}
@@ -30,9 +30,13 @@
                                 <button class="btn btn-primary sendButton" id="sendButton">Gönder</button>
                             </div>
                         </div>
+                        {{memberNames}}
                     </div>
                 </form>
             </div>
+
         </div>
+
     </div>
+
 </template>
