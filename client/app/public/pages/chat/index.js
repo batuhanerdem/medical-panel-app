@@ -32,7 +32,7 @@ Template.chat.helpers({
     },
     findSendersNameById: function (sendersId) {
         const sender = Meteor.users.findOne({ _id: sendersId })
-        return sender.profile.name
+        return sender?.profile.name
     },
     selectedGroupId: function () {
         const selectedGroupId = Template.instance().groupId
@@ -41,9 +41,9 @@ Template.chat.helpers({
     memberNames: function () {
         const groupId = Template.instance().groupId
         const group = Groups.findOne({ _id: groupId })
-        const members = group.members
+        const members = group?.members
         let memberNames = []
-        members.forEach(member => {
+        members?.forEach(member => {
             memberNames.push(member.profile.name)
         });
         return memberNames

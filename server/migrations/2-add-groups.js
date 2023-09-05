@@ -5,17 +5,20 @@ Migrations.add({
     up: function () {
 
         const allUsers = Meteor.users.find({}).fetch()
+        const usersIdAndNames = getUserIdAndNameArray(allUsers)
         const groupObj = {
             name: 'Genel',
-            members: allUsers
+            members: usersIdAndNames
         }
         Groups.insert(groupObj)
 
         const professions = Object.values(PROFESSIONS)
         professions.forEach((profession) => {
             const users = Meteor.users.find({ 'profile.profession': profession }).fetch()
+            const usersIdAndNames = getUserIdAndNameArray(users)
+
             const groupObj = {
-                members: users,
+                members: usersIdAndNames,
                 name: profession
             }
             Groups.insert(groupObj)

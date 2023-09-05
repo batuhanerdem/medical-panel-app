@@ -3,7 +3,7 @@
     <form class="tc layout">
       <label for="exampleInputPassword1">Tc</label>
       <input type="text" class="form-control" maxlength="11" id="exampleInputPassword1" name="tc"
-        placeholder="Enter tc number">
+        placeholder="Tc no'yu girin">
       <button type="submit" class="btn btn-primary btn-tc mt-4">Sorgula</button>
     </form>
 
@@ -35,31 +35,29 @@
 
     <form class="register layout mt-0">
       <h4 class="fw-normal mb-1 pb-2 mt-0" style="letter-spacing: 1px;">Hastayi kaydet</h4>
-      <label for="exampleInputEmail1">Name</label>
-      <input type="text" class="form-control" id="exampleInputEmail1" name="name" placeholder="Enter name">
-      <label for="exampleInputEmail1">Surname</label>
-      <input type="text" class="form-control" id="exampleInputEmail1" name="surname" placeholder="Enter surname">
+      <label for="exampleInputEmail1">İsim</label>
+      <input type="text" class="form-control" id="exampleInputEmail1" name="name" placeholder="Adınızı girin">
+      <label for="exampleInputEmail1">Soyisim</label>
+      <input type="text" class="form-control" id="exampleInputEmail1" name="surname" placeholder="Soyadınızı girin">
       <label>Birth Year</label>
-      <input type="year" class="form-control" id="exampleInputEmail1" name="birthYear" placeholder="Enter year">
+      <input type="year" class="form-control" id="exampleInputEmail1" name="birthYear"
+        placeholder="Doğum yılınızı girin">
       <label>Gender</label>
       <select class="custom-select mr-sm-2" name="gender" id="inlineFormCustomSelect">
-        <option selected>Choose</option>
-        <option value="Male">Male</option>
-        <option value="Female">Female</option>
+        <option selected>Seçin</option>
+        <option value="Erkek">Erkek</option>
+        <option value="Kadın">Kadın</option>
       </select>
 
       <label>Doctor</label>
       <select class="custom-select mr-sm-2" name="doctor" id="inlineFormCustomSelect2">
-        <option selected>Choose</option>
+        <option selected>Seçin</option>
         {{#each doctors}}
           <option value={{_id}}>{{profile.name}}</option>
         {{/each}}
       </select>
       <button type="submit" class="btn btn-primary btn-form">Kaydet</button>
     </form>
-    {{#if isSucceed}}
-      <span>Basariyla kayit olundu!</span>
-    {{/if}}
   {{/unless}}
 
 </template>
