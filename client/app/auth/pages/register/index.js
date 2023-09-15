@@ -23,7 +23,11 @@ Template.register.events({
 
 Template.register.helpers({
     professions: function () {
-        const professionsArray = Object.values(PROFESSIONS)
-        return professionsArray
+        return Object.keys(PROFESSIONS).map(key => {
+            return {
+                key: key,
+                value: PROFESSIONS[key]
+            }
+        })
     }
 });
